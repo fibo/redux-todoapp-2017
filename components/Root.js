@@ -45,7 +45,7 @@ Root.propTypes = {
 
 Root.defaultProps = {
   fetchTodosIfNeeded: Function.prototype,
-  title: 'Webapp Redux template',
+  title: 'Todo app',
   todos: {
     list: [],
     when_fetched: null

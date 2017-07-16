@@ -1,10 +1,14 @@
 import fetch from 'isomorphic-fetch'
-import {
-  checkStatus,
-  headersJSON,
-  parseJSON,
-  prepareRequest
-} from '../utils/fetch'
+
+const checkStatus = (response) => {
+  if (response.ok) {
+    return response
+  } else {
+    let error = new Error(response.statusText)
+    error.response = response
+    throw error
+  }
+}
 
 function fetchTodos (api) {
   return (dispatch) => {
@@ -16,9 +20,9 @@ function fetchTodos (api) {
 
     return fetch(endpoint, { headers })
       .then(checkStatus)
-      .then(parseJSON)
-      .then(receiveData)
-      .catch(responseFailure)
+      .then(response => response.json())
+      .then(data => dispatch({ data, type: 'FETCH_TODOS_SUCCESS' }))
+      .catch((error) => dispatch({ error, type: 'FETCH_TODOS_FAILURE' }))
   }
 }
 

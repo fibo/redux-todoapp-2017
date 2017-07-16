@@ -1,5 +1,4 @@
-console.log('ok')
-/*import 'babel-polyfill';
+import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -14,4 +13,4 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById('root')
-);*/
+);
