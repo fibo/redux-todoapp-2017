@@ -1,5 +1,14 @@
 import fetch from 'isomorphic-fetch'
 
+const baseURL = 'http://localhost:3000'
+
+const headersJSON = () => ({
+// JSON Web Token authentication header.
+//  'Authorization': `BEARER ${token}`,
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+})
+
 const checkStatus = (response) => {
   if (response.ok) {
     return response
@@ -10,13 +19,12 @@ const checkStatus = (response) => {
   }
 }
 
-function fetchTodos (api) {
+function fetchTodos () {
   return (dispatch) => {
-    const { receiveData, responseFailure } = prepareRequest(dispatch, 'FETCH_TODOS')
+    dispatch({ type: 'FETCH_TODOS_REQUEST' })
 
-    const baseURL = api.baseURL
-    const headers = headersJSON(api.token)
-    const endpoint = `${baseURL}/todo/list`
+    const headers = headersJSON()
+    const endpoint = `${baseURL}/todos`
 
     return fetch(endpoint, { headers })
       .then(checkStatus)
@@ -34,6 +42,6 @@ export function fetchTodosIfNeeded (api) {
   }
 }
 
-function shouldFetchTodos ({ todos }) {
-  return (todos.when_fetched === null)
+function shouldFetchTodos ({ when_fetched }) {
+  return when_fetched === null
 }

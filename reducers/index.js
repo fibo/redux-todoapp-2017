@@ -1,9 +1,4 @@
-const initialState = {
-  todos: {
-    list: [],
-    when_fetched: null
-  }
-}
+import initialState from '../store/initialState'
 
 export default function (state = initialState, action) {
   switch (action.type) {

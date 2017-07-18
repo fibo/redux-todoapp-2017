@@ -21,7 +21,7 @@ class Root extends React.Component {
         <h1>{title}</h1>
         <h2>ToDo</h2>
         <ul>
-          {todos.list.map(
+          {todos.map(
             (item, i) => (
               <li key={i}>
                 {item.content}
@@ -37,19 +37,13 @@ class Root extends React.Component {
 Root.propTypes = {
   fetchTodosIfNeeded: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  todos: PropTypes.shape({
-    list: PropTypes.array,
-    when_fetched: PropTypes.string
-  }).isRequired
+  todos: PropTypes.array.isRequired
 }
 
 Root.defaultProps = {
   fetchTodosIfNeeded: Function.prototype,
   title: 'Todo app',
-  todos: {
-    list: [],
-    when_fetched: null
-  }
+  todos: []
 }
 
 export default Root
