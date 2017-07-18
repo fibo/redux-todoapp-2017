@@ -2,7 +2,8 @@
   "todos": [
     {
       "id": 1,
-      "text": "remember the milk"
+      "text": "remember the milk",
+      "completed": false
     }
   ]
 }
