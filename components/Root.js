@@ -1,5 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import TodoItem from './TodoItem';
 
 class Root extends React.Component {
   componentDidMount () {
@@ -17,19 +19,28 @@ class Root extends React.Component {
     } = this.props
 
     return (
-      <div>
-        <h1>{title}</h1>
-        <h2>ToDo</h2>
-        <ul>
-          {todos.map(
-            (item, i) => (
-              <li key={i}>
-                {item.content}
-              </li>
-            )
-          )}
-        </ul>
-      </div>
+      <section className='todoapp'>
+        <div>
+          <header className='header'>
+            <h1>{title}</h1>
+            <input
+              className='new-todo'
+              placeholder='What needs to be done?'
+              autoFocus={true}
+            />
+          </header>
+
+          <section className='main'>
+            <input
+              className='toggle-all'
+              type='checkbox'
+            />
+            <ul className='todo-list'>
+              {todos.map((todo, i) => <TodoItem key={i} />)}
+            </ul>
+          </section>
+        </div>
+      </section>
     )
   }
 }
