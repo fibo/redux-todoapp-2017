@@ -37,6 +37,7 @@
     "babel-loader": "^7.1.1",
     "babel-preset-react-app": "^3.0.1",
     "classnames": "^2.2.5",
+    "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
     "eslint-config-react-app": "^1.0.5",
     "eslint-plugin-flowtype": "^2.35.0",
@@ -49,6 +50,7 @@
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "style-loader": "^0.18.2",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
   }
