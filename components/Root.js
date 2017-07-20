@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Footer from './Footer';
 import TodoItem from './TodoItem';
+
+import { fetchTodosIfNeeded } from '../actions';
 
 class Root extends React.Component {
   componentDidMount () {
-    const {
-      fetchTodosIfNeeded
-    } = this.props
-
-    fetchTodosIfNeeded()
+    this.props.fetchTodosIfNeeded()
   }
 
   render () {
     const {
+      activeTodoCount,
+      completedTodoCount,
+      onClearCompleted,
       todos,
       title
     } = this.props
@@ -36,9 +38,20 @@ class Root extends React.Component {
               type='checkbox'
             />
             <ul className='todo-list'>
-              {todos.map((todo, i) => <TodoItem key={i} />)}
+            {todos.list.map(todo => (
+              <TodoItem key={todo.id}
+                text={todo.text}
+              />
+            ))}
             </ul>
           </section>
+          {(activeTodoCount || completedTodoCount) ? (
+            <Footer
+              activeTodoCount={activeTodoCount}
+              completedTodoCount={completedTodoCount}
+              onClearCompleted={onClearCompleted}
+            />
+          ) : null}
         </div>
       </section>
     )
@@ -46,15 +59,23 @@ class Root extends React.Component {
 }
 
 Root.propTypes = {
+  activeTodoCount: PropTypes.number.isRequired,
+  completedTodoCount: PropTypes.number.isRequired,
   fetchTodosIfNeeded: PropTypes.func.isRequired,
+  onClearCompleted: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  todos: PropTypes.array.isRequired
+  todos: PropTypes.shape({
+    list: PropTypes.array.isRequired
+  }).isRequired
 }
 
 Root.defaultProps = {
+  activeTodoCount: 0,
+  completedTodoCount: 0,
   fetchTodosIfNeeded: Function.prototype,
+  onClearCompleted: Function.prototype,
   title: 'Todo app',
-  todos: []
+  todos: { list: [] }
 }
 
 export default Root

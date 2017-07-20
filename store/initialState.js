@@ -1,6 +1,8 @@
 const initialState = {
-  todos: [],
-  when_fetched: null
+  todos: {
+    list: [],
+    when_fetched: null
+  }
 }
 
 export default initialState

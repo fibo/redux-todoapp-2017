@@ -5,13 +5,25 @@ import {
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
-  return state
+  const todosList = state.todos.list;
+
+  const activeTodoCount = todosList.reduce((accum, todo) => {
+    return todo.completed ? accum : accum + 1;
+  }, 0);
+
+  return Object.assign({}, state, {
+    activeTodoCount,
+    completedTodoCount: todosList.length - activeTodoCount
+  })
 }
 
-const mapDispatchToProps = (dispatch, { api }) => {
+const mapDispatchToProps = dispatch => {
   return {
-    fetchTodosIfNeeded: () => {
-      dispatch(fetchTodosIfNeeded(api))
+    fetchTodosIfNeeded() {
+      dispatch(fetchTodosIfNeeded())
+    },
+    onClearCompleted() {
+      // TODO
     }
   }
 }

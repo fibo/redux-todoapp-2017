@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import classNames from 'classnames'
+import classNames from 'classnames';
 
 export default class TodoItem extends React.Component {
   constructor (props) {
@@ -29,7 +29,9 @@ export default class TodoItem extends React.Component {
     const {
       completed,
       editing,
-      onDestroy
+      onDestroy,
+      onToggle,
+      text
     } = this.props;
 
     const {
@@ -37,6 +39,7 @@ export default class TodoItem extends React.Component {
     } = this.state;
 
     const handleChange = this.handleChange.bind(this);
+    const handleEdit = this.handleEdit.bind(this);
     const handleKeyDown = this.handleKeyDown.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
 
@@ -49,7 +52,7 @@ export default class TodoItem extends React.Component {
             checked={completed}
             onChange={onToggle}
           />
-          <label onDoubleClick={handleEdit}>{title}</label>
+          <label onDoubleClick={handleEdit}>{text}</label>
           <button
             className='destroy'
             onClick={onDestroy}
@@ -72,7 +75,9 @@ export default class TodoItem extends React.Component {
 TodoItem.propTypes = {
   completed: PropTypes.bool.isRequired,
   editing: PropTypes.bool.isRequired,
-  onDestroy: Function.prototype
+  text: PropTypes.string,
+  onDestroy: Function.prototype,
+  onToggle: Function.prototype
 }
 
 TodoItem.defaultProps = {

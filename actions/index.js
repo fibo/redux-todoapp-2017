@@ -3,8 +3,6 @@ import fetch from 'isomorphic-fetch'
 const baseURL = 'http://localhost:3000'
 
 const headersJSON = () => ({
-// JSON Web Token authentication header.
-//  'Authorization': `BEARER ${token}`,
   'Accept': 'application/json',
   'Content-Type': 'application/json'
 })
@@ -29,19 +27,23 @@ function fetchTodos () {
     return fetch(endpoint, { headers })
       .then(checkStatus)
       .then(response => response.json())
-      .then(data => dispatch({ data, type: 'FETCH_TODOS_SUCCESS' }))
-      .catch((error) => dispatch({ error, type: 'FETCH_TODOS_FAILURE' }))
+      .then(data => {
+        dispatch({ data, type: 'FETCH_TODOS_SUCCESS' })
+      })
+      .catch(error => {
+        dispatch({ error, type: 'FETCH_TODOS_FAILURE' })
+      })
   }
 }
 
-export function fetchTodosIfNeeded (api) {
+export function fetchTodosIfNeeded () {
   return (dispatch, getState) => {
     if (shouldFetchTodos(getState())) {
-      return dispatch(fetchTodos(api))
+      return dispatch(fetchTodos())
     }
   }
 }
 
-function shouldFetchTodos ({ when_fetched }) {
-  return when_fetched === null
+function shouldFetchTodos ({ todos }) {
+  return todos.when_fetched === null
 }
