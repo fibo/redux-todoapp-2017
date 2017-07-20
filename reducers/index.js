@@ -19,6 +19,45 @@ export default function (state = initialState, action) {
         }
       )
 
+    case 'TOGGLE_FILTER':
+      switch (action.name) {
+        case 'active':
+          return Object.assign({},
+            state,
+            {
+              filter: {
+                active: !state.filter.active,
+                all: false,
+                completed: false
+              }
+            }
+          )
+
+        case 'all':
+          return Object.assign({},
+            state,
+            {
+              filter: {
+                active: false,
+                all: !state.filter.all,
+                completed: false
+              }
+            }
+          )
+
+        case 'completed':
+          return Object.assign({},
+            state,
+            {
+              filter: {
+                active: false,
+                all: false,
+                completed: !state.filter.completed
+              }
+            }
+          )
+      }
+
     default:
       return state
   }

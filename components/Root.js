@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import Footer from './Footer';
 import TodoItem from './TodoItem';
 
-import { fetchTodosIfNeeded } from '../actions';
-
 class Root extends React.Component {
   componentDidMount () {
     this.props.fetchTodosIfNeeded()
@@ -15,6 +13,10 @@ class Root extends React.Component {
     const {
       activeTodoCount,
       completedTodoCount,
+      filter,
+      toggleActive,
+      toggleAll,
+      toggleCompleted,
       onClearCompleted,
       todos,
       title
@@ -49,6 +51,10 @@ class Root extends React.Component {
             <Footer
               activeTodoCount={activeTodoCount}
               completedTodoCount={completedTodoCount}
+              toggleActive={toggleActive}
+              toggleAll={toggleAll}
+              toggleCompleted={toggleCompleted}
+              filter={filter}
               onClearCompleted={onClearCompleted}
             />
           ) : null}

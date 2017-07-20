@@ -7,7 +7,11 @@ export default class Footer extends React.Component {
     const {
       count,
       completedTodoCount,
-      onClearCompleted
+      filter,
+      onClearCompleted,
+      toggleActive,
+      toggleAll,
+      toggleCompleted,
     } = this.props;
 
     const itemWord = count === 1 ? 'item' : 'items';
@@ -20,25 +24,28 @@ export default class Footer extends React.Component {
         <ul className='filters'>
           <li>
             <a
-              href='#/'
-              className={classNames({selected: true})}>
-                All
+              className={classNames({selected: filter.all})}
+              onClick={toggleAll}
+            >
+              All
             </a>
           </li>
           {' '}
           <li>
             <a
-              href='#/active'
-              className={classNames({selected: true})}>
-                Active
+              className={classNames({selected: filter.active})}
+              onClick={toggleActive}
+            >
+              Active
             </a>
           </li>
           {' '}
           <li>
             <a
-              href='#/completed'
-              className={classNames({selected: true})}>
-                Completed
+              className={classNames({selected: filter.completed})}
+              onClick={toggleCompleted}
+            >
+              Completed
             </a>
           </li>
         </ul>
@@ -57,11 +64,6 @@ export default class Footer extends React.Component {
 Footer.propTypes = {
   activeTodoCount: PropTypes.number.isRequired,
   completedTodoCount: PropTypes.number.isRequired,
+  toggleActive: PropTypes.func.isRequired,
   onClearCompleted: PropTypes.func.isRequired
-}
-
-Footer.defaultProps = {
-  activeTodoCount: 0,
-  completedTodoCount: 0,
-  onClearCompleted: Function.prototype
 }

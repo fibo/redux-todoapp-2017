@@ -47,3 +47,10 @@ export function fetchTodosIfNeeded () {
 function shouldFetchTodos ({ todos }) {
   return todos.when_fetched === null
 }
+
+export function toggleFilter (name) {
+  return {
+    type: 'TOGGLE_FILTER',
+    name
+  }
+}

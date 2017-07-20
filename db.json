@@ -3,6 +3,11 @@
     {
       "id": 1,
       "text": "remember the milk",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "text": "go to gym",
       "completed": false
     }
   ]

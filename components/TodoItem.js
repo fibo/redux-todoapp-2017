@@ -59,7 +59,6 @@ export default class TodoItem extends React.Component {
           />
         </div>
         <input
-          ref='editField'
           ref={(domElement) => { this.editField = domElement; }}
           className='edit'
           value={editText}
