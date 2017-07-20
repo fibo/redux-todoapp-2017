@@ -11,3 +11,7 @@
 * `npm run lint`: lint code.
 * `npm run build`: generate bundle.js in public/ folder.
 
+## Branches
+
+* master
+* style-loader
