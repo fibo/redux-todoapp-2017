@@ -17,8 +17,29 @@ const checkStatus = (response) => {
   }
 }
 
+export function addTodo (todo) {
+  return dispatch => {
+    dispatch({ type: 'ADD_TODO_REQUEST' })
+
+    const headers = headersJSON()
+    const endpoint = `${baseURL}/todos`
+    const method = 'POST'
+    const body = JSON.stringify(todo)
+
+    return fetch(endpoint, { method, headers, body })
+      .then(checkStatus)
+      .then(response => response.json())
+      .then(data => {
+        dispatch({ data, type: 'ADD_TODO_SUCCESS' })
+      })
+      .catch(error => {
+        dispatch({ error, type: 'ADD_TODO_FAILURE' })
+      })
+  }
+}
+
 function fetchTodos () {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: 'FETCH_TODOS_REQUEST' })
 
     const headers = headersJSON()

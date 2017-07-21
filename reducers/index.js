@@ -1,12 +1,31 @@
-import initialState from '../store/initialState'
+import initialState from '../store/initialState';
+
+const now = () => ((new Date).getTime());
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case 'ADD_TODO_FAILURE':
+      return state;
+
+    case 'ADD_TODO_REQUEST':
+      return state;
+
+    case 'ADD_TODO_SUCCESS':
+      return Object.assign({},
+        state,
+        {
+          todos: {
+            list: [ ...state.todos.list, action.data ],
+            when_fetched: now()
+          }
+        }
+      );
+
     case 'FETCH_TODOS_FAILURE':
-      return state
+      return state;
 
     case 'FETCH_TODOS_REQUEST':
-      return state
+      return state;
 
     case 'FETCH_TODOS_SUCCESS':
       return Object.assign({},
@@ -14,10 +33,10 @@ export default function (state = initialState, action) {
         {
           todos: {
             list: action.data,
-            when_fetched: (new Date()).toString()
+            when_fetched: now()
           }
         }
-      )
+      );
 
     case 'TOGGLE_FILTER':
       switch (action.name) {
@@ -31,7 +50,7 @@ export default function (state = initialState, action) {
                 completed: false
               }
             }
-          )
+          );
 
         case 'all':
           return Object.assign({},
@@ -43,7 +62,7 @@ export default function (state = initialState, action) {
                 completed: false
               }
             }
-          )
+          );
 
         case 'completed':
           return Object.assign({},
@@ -55,10 +74,13 @@ export default function (state = initialState, action) {
                 completed: !state.filter.completed
               }
             }
-          )
+          );
+
+        default:
+          return state;
       }
 
     default:
-      return state
+      return state;
   }
 }

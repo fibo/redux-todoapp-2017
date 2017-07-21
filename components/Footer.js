@@ -5,7 +5,7 @@ import classNames from 'classnames';
 export default class Footer extends React.Component {
   render () {
     const {
-      count,
+      activeTodoCount,
       completedTodoCount,
       filter,
       onClearCompleted,
@@ -14,12 +14,12 @@ export default class Footer extends React.Component {
       toggleCompleted,
     } = this.props;
 
-    const itemWord = count === 1 ? 'item' : 'items';
+    const itemWord = activeTodoCount === 1 ? 'item' : 'items';
 
     return (
       <footer className='footer'>
         <span className='todo-count'>
-          <strong>{count}</strong> {itemWord} left
+          <strong>{activeTodoCount}</strong> {itemWord} left
         </span>
         <ul className='filters'>
           <li>

@@ -5,7 +5,7 @@
   "description": "is an example React/Redux app",
   "main": "index.js",
   "scripts": {
-    "api": "json-server --delay 400 db.json",
+    "api": "json-server --watch --delay 400 db.json",
     "build": "BABEL_ENV=production webpack -p --progress",
     "lint": "eslint .",
     "start": "BABEL_ENV=development webpack-dev-server --content-base public --inline --hot",

@@ -6,12 +6,13 @@ import TodoItem from './TodoItem';
 
 class Root extends React.Component {
   componentDidMount () {
-    this.props.fetchTodosIfNeeded()
+    this.props.fetchTodosIfNeeded();
   }
 
   render () {
     const {
       activeTodoCount,
+      addTodo,
       completedTodoCount,
       filter,
       toggleActive,
@@ -20,7 +21,7 @@ class Root extends React.Component {
       onClearCompleted,
       todos,
       title
-    } = this.props
+    } = this.props;
 
     return (
       <section className='todoapp'>
@@ -31,6 +32,16 @@ class Root extends React.Component {
               className='new-todo'
               placeholder='What needs to be done?'
               autoFocus={true}
+              onKeyDown={(event) => {
+                const target = event.target;
+                const text = target.value;
+                const key = event.key;
+
+                if ((text !== '') && (key === 'Enter')) {
+                  addTodo(text);
+                  target.value = '';
+                }
+              }}
             />
           </header>
 
@@ -40,7 +51,13 @@ class Root extends React.Component {
               type='checkbox'
             />
             <ul className='todo-list'>
-            {todos.list.map(todo => (
+            {todos.list
+                  .filter(({ completed }) => {
+                    if (filter.completed) return completed;
+                    if (filter.active) return !completed;
+                    if (filter.all) return true;
+                  })
+                  .map(todo => (
               <TodoItem key={todo.id}
                 text={todo.text}
               />
@@ -60,12 +77,13 @@ class Root extends React.Component {
           ) : null}
         </div>
       </section>
-    )
+    );
   }
 }
 
 Root.propTypes = {
   activeTodoCount: PropTypes.number.isRequired,
+  addTodo: PropTypes.func.isRequired,
   completedTodoCount: PropTypes.number.isRequired,
   fetchTodosIfNeeded: PropTypes.func.isRequired,
   onClearCompleted: PropTypes.func.isRequired,
@@ -77,6 +95,7 @@ Root.propTypes = {
 
 Root.defaultProps = {
   activeTodoCount: 0,
+  addTodo: Function.prototype,
   completedTodoCount: 0,
   fetchTodosIfNeeded: Function.prototype,
   onClearCompleted: Function.prototype,
