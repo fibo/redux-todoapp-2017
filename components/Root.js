@@ -52,16 +52,17 @@ class Root extends React.Component {
             />
             <ul className='todo-list'>
             {todos.list
-                  .filter(({ completed }) => {
-                    if (filter.completed) return completed;
-                    if (filter.active) return !completed;
-                    if (filter.all) return true;
-                  })
-                  .map(todo => (
-              <TodoItem key={todo.id}
-                text={todo.text}
-              />
-            ))}
+              .filter(({ completed }) => {
+                if (filter.completed) return completed;
+                if (filter.active) return !completed;
+                if (filter.all) return true;
+              })
+              .map((todo, i) => (
+                <TodoItem key={i}
+                  todo={todo}
+                />
+              ))
+            }
             </ul>
           </section>
           {(activeTodoCount || completedTodoCount) ? (
@@ -91,7 +92,7 @@ Root.propTypes = {
   todos: PropTypes.shape({
     list: PropTypes.array.isRequired
   }).isRequired
-}
+};
 
 Root.defaultProps = {
   activeTodoCount: 0,
@@ -101,6 +102,6 @@ Root.defaultProps = {
   onClearCompleted: Function.prototype,
   title: 'Todo app',
   todos: { list: [] }
-}
+};
 
-export default Root
+export default Root;

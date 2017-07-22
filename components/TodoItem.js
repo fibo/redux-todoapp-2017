@@ -27,22 +27,28 @@ export default class TodoItem extends React.Component {
 
   render () {
     const {
-      completed,
-      editing,
       onDestroy,
       onToggle,
-      text
+      todo
     } = this.props;
 
     const {
       editText
     } = this.state;
 
+    const editing = false; // TODO
+
+    const {
+      completed,
+      text
+    } = todo;
+
     const handleChange = this.handleChange.bind(this);
     const handleEdit = this.handleEdit.bind(this);
     const handleKeyDown = this.handleKeyDown.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
 
+    console.log(completed)
     return (
       <li className={classNames({ completed, editing })}>
         <div className='view'>
@@ -68,18 +74,14 @@ export default class TodoItem extends React.Component {
         />
       </li>
     )
-  }
+  };
 }
 
 TodoItem.propTypes = {
-  completed: PropTypes.bool.isRequired,
-  editing: PropTypes.bool.isRequired,
-  text: PropTypes.string,
+  todo: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired
+  }).isRequired,
   onDestroy: Function.prototype,
   onToggle: Function.prototype
-}
-
-TodoItem.defaultProps = {
-  completed: false,
-  editing: false
-}
+};
