@@ -1,19 +1,19 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://localhost:3000';
 
 const headersJSON = () => ({
   'Accept': 'application/json',
   'Content-Type': 'application/json'
-})
+});
 
 const checkStatus = (response) => {
   if (response.ok) {
-    return response
+    return response;
   } else {
-    let error = new Error(response.statusText)
-    error.response = response
-    throw error
+    let error = new Error(response.statusText);
+    error.response = response;
+    throw error;
   }
 }
 
@@ -36,6 +36,28 @@ export function addTodo (todo) {
         dispatch({ error, type: 'ADD_TODO_FAILURE' });
       });
   }
+}
+
+export function deleteTodo (todo) {
+  const id = todo.id;
+
+  return dispatch => {
+    dispatch({ type: 'DELETE_TODO_REQUEST' })
+
+    const headers = headersJSON();
+    const endpoint = `${baseURL}/todos/${id}`;
+    const method = 'DELETE';
+
+    return fetch(endpoint, { method, headers })
+      .then(checkStatus)
+      .then(response => response.json())
+      .then(data => {
+        dispatch({ id, type: 'DELETE_TODO_SUCCESS' })
+      })
+      .catch(error => {
+        dispatch({ error, type: 'DELETE_TODO_FAILURE' })
+      });
+  };
 }
 
 export function editTodo (todo, text) {

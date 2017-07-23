@@ -22,6 +22,23 @@ export default function (state = initialState, action) {
         }
       );
 
+    case 'DELETE_TODO_REQUEST':
+      return state;
+
+    case 'DELETE_TODO_SUCCESS':
+      return Object.assign({},
+        state,
+        {
+          todos: {
+            list: state.todos.list.filter(({ id }) => id !== action.id)
+          }
+        }
+      );
+
+    case 'DELETE_TODO_FAILURE':
+      console.error(action.error);
+      return state;
+
     case 'EDIT_TODO_REQUEST':
       return state;
 

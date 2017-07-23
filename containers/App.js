@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {
   addTodo,
   fetchTodosIfNeeded,
+  deleteTodo,
   editTodo,
   toggleFilter,
   toggleTodo,
@@ -32,6 +33,11 @@ const mapDispatchToProps = dispatch => {
     },
     onClearCompleted() {
       // TODO
+    },
+    onDestroy(todo) {
+      return function () {
+        dispatch(deleteTodo(todo))
+      }
     },
     onEdit(todo) {
       return function (text) {

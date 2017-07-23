@@ -16,8 +16,9 @@ class Root extends React.Component {
       completedTodoCount,
       filter,
       onClearCompleted,
-      onToggle,
+      onDestroy,
       onEdit,
+      onToggle,
       title,
       todos,
       toggleActive,
@@ -61,7 +62,7 @@ class Root extends React.Component {
               })
               .map((todo, i) => (
                 <TodoItem key={i}
-                  onDestroy={Function.prototype}
+                  onDestroy={onDestroy(todo)}
                   onEdit={onEdit(todo)}
                   onToggle={onToggle(todo)}
                   todo={todo}
