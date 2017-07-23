@@ -2,9 +2,9 @@ import Root from '../components/Root'
 import { connect } from 'react-redux'
 import {
   addTodo,
-  fetchTodosIfNeeded,
   deleteTodo,
   editTodo,
+  fetchTodosIfNeeded,
   toggleFilter,
   toggleTodo,
 } from '../actions'
@@ -16,23 +16,28 @@ const mapStateToProps = (state, ownProps) => {
     return todo.completed ? accum : accum + 1;
   }, 0);
 
+  const completedTodos = todosList.filter(({ completed }) => completed);
+
   return Object.assign({}, state, {
     activeTodoCount,
-    completedTodoCount: todosList.length - activeTodoCount
+    completedTodoCount: todosList.length - activeTodoCount,
+    completedTodos,
   })
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addTodo(text) {
-      console.log(text)
       dispatch(addTodo({ text, completed: false }));
     },
     fetchTodosIfNeeded() {
       dispatch(fetchTodosIfNeeded());
     },
-    onClearCompleted() {
-      // TODO
+    onClearCompleted(todos) {
+      console.log(todos)
+      return function () {
+        todos.forEach(todo => dispatch(deleteTodo(todo)));
+      }
     },
     onDestroy(todo) {
       return function () {

@@ -14,6 +14,7 @@ class Root extends React.Component {
       activeTodoCount,
       addTodo,
       completedTodoCount,
+      completedTodos,
       filter,
       onClearCompleted,
       onDestroy,
@@ -79,7 +80,7 @@ class Root extends React.Component {
               toggleAll={toggleAll}
               toggleCompleted={toggleCompleted}
               filter={filter}
-              onClearCompleted={onClearCompleted}
+              onClearCompleted={onClearCompleted(completedTodos)}
             />
           ) : null}
         </div>
@@ -94,6 +95,9 @@ Root.propTypes = {
   completedTodoCount: PropTypes.number.isRequired,
   fetchTodosIfNeeded: PropTypes.func.isRequired,
   onClearCompleted: PropTypes.func.isRequired,
+  onDestroy: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   todos: PropTypes.shape({
     list: PropTypes.array.isRequired
@@ -106,6 +110,9 @@ Root.defaultProps = {
   completedTodoCount: 0,
   fetchTodosIfNeeded: Function.prototype,
   onClearCompleted: Function.prototype,
+  onDestroy: Function.prototype,
+  onEdit: Function.prototype,
+  onToggle: Function.prototype,
   title: 'Todo app',
   todos: { list: [] }
 };
