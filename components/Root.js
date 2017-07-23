@@ -15,12 +15,13 @@ class Root extends React.Component {
       addTodo,
       completedTodoCount,
       filter,
+      onClearCompleted,
+      onToggle,
+      title,
+      todos,
       toggleActive,
       toggleAll,
-      toggleCompleted,
-      onClearCompleted,
-      todos,
-      title
+      toggleCompleted
     } = this.props;
 
     return (
@@ -55,10 +56,11 @@ class Root extends React.Component {
               .filter(({ completed }) => {
                 if (filter.completed) return completed;
                 if (filter.active) return !completed;
-                if (filter.all) return true;
+                return true; // filter.all
               })
               .map((todo, i) => (
                 <TodoItem key={i}
+                  onToggle={onToggle(todo.id)}
                   todo={todo}
                 />
               ))

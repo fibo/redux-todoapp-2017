@@ -75,3 +75,10 @@ export function toggleFilter (name) {
     name
   }
 }
+
+export function toggleTodo (id) {
+  return {
+    type: 'TOGGLE_TODO',
+    id
+  }
+}

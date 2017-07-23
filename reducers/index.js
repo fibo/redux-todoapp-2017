@@ -22,6 +22,7 @@ export default function (state = initialState, action) {
       );
 
     case 'FETCH_TODOS_FAILURE':
+      console.error(action.error);
       return state;
 
     case 'FETCH_TODOS_REQUEST':
@@ -79,6 +80,22 @@ export default function (state = initialState, action) {
         default:
           return state;
       }
+
+    case 'TOGGLE_TODO':
+      return Object.assign({},
+        state,
+        {
+          todos: {
+            list: state.todos.list.map((todo) => {
+              if (todo.id === action.id) {
+               todo.completed = !todo.completed;
+              }
+
+              return todo;
+            })
+          }
+        }
+      );
 
     default:
       return state;

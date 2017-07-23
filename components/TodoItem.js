@@ -48,7 +48,6 @@ export default class TodoItem extends React.Component {
     const handleKeyDown = this.handleKeyDown.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
 
-    console.log(completed)
     return (
       <li className={classNames({ completed, editing })}>
         <div className='view'>

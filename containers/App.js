@@ -2,8 +2,9 @@ import Root from '../components/Root'
 import { connect } from 'react-redux'
 import {
   addTodo,
+  fetchTodosIfNeeded,
   toggleFilter,
-  fetchTodosIfNeeded
+  toggleTodo
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -30,6 +31,11 @@ const mapDispatchToProps = dispatch => {
     },
     onClearCompleted() {
       // TODO
+    },
+    onToggle(id) {
+      return function () {
+        dispatch(toggleTodo(id))
+      }
     },
     toggleActive() {
       dispatch(toggleFilter('active'));
