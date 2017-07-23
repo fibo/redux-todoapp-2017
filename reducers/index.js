@@ -1,10 +1,11 @@
 import initialState from '../store/initialState';
 
-const now = () => ((new Date).getTime());
+const now = () => ((new Date()).getTime());
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'ADD_TODO_FAILURE':
+      console.error(action.error);
       return state;
 
     case 'ADD_TODO_REQUEST':
@@ -20,6 +21,29 @@ export default function (state = initialState, action) {
           }
         }
       );
+
+    case 'EDIT_TODO_REQUEST':
+      return state;
+
+    case 'EDIT_TODO_SUCCESS':
+      return Object.assign({},
+        state,
+        {
+          todos: {
+            list: state.todos.list.map((todo) => {
+              if (todo.id === action.data.id) {
+               todo.text = action.data.text;
+              }
+
+              return todo;
+            })
+          }
+        }
+      );
+
+    case 'EDIT_TODO_FAILURE':
+      console.error(action.error);
+      return state;
 
     case 'FETCH_TODOS_FAILURE':
       console.error(action.error);
@@ -81,14 +105,17 @@ export default function (state = initialState, action) {
           return state;
       }
 
-    case 'TOGGLE_TODO':
+    case 'TOGGLE_TODO_REQUEST':
+      return state;
+
+    case 'TOGGLE_TODO_SUCCESS':
       return Object.assign({},
         state,
         {
           todos: {
             list: state.todos.list.map((todo) => {
-              if (todo.id === action.id) {
-               todo.completed = !todo.completed;
+              if (todo.id === action.data.id) {
+               todo.completed = action.data.completed;
               }
 
               return todo;
@@ -96,6 +123,11 @@ export default function (state = initialState, action) {
           }
         }
       );
+
+
+    case 'TOGGLE_TODO_FAILURE':
+      console.error(action.error);
+      return state;
 
     default:
       return state;

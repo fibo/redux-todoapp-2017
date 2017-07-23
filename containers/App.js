@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import {
   addTodo,
   fetchTodosIfNeeded,
+  editTodo,
   toggleFilter,
-  toggleTodo
+  toggleTodo,
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -32,9 +33,14 @@ const mapDispatchToProps = dispatch => {
     onClearCompleted() {
       // TODO
     },
-    onToggle(id) {
+    onEdit(todo) {
+      return function (text) {
+        dispatch(editTodo(todo, text))
+      }
+    },
+    onToggle(todo) {
       return function () {
-        dispatch(toggleTodo(id))
+        dispatch(toggleTodo(todo))
       }
     },
     toggleActive() {
