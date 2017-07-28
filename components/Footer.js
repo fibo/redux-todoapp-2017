@@ -10,9 +10,6 @@ export default class Footer extends React.Component {
       completedTodoCount,
       filter,
       onClearCompleted,
-      toggleActive,
-      toggleAll,
-      toggleCompleted,
     } = this.props;
 
     let itemMessage;
@@ -28,7 +25,6 @@ export default class Footer extends React.Component {
           <li>
             <Link to='/all'
               className={classNames({selected: filter.all})}
-              onClick={toggleAll}
             >
               All
             </Link>
@@ -36,7 +32,6 @@ export default class Footer extends React.Component {
           <li>
             <Link to='/active'
               className={classNames({selected: filter.active})}
-              onClick={toggleActive}
             >
               Active
             </Link>
@@ -44,7 +39,6 @@ export default class Footer extends React.Component {
           <li>
             <Link to='/completed'
               className={classNames({selected: filter.completed})}
-              onClick={toggleCompleted}
             >
               Completed
             </Link>
@@ -65,6 +59,5 @@ export default class Footer extends React.Component {
 Footer.propTypes = {
   activeTodoCount: PropTypes.number.isRequired,
   completedTodoCount: PropTypes.number.isRequired,
-  toggleActive: PropTypes.func.isRequired,
-  onClearCompleted: PropTypes.func.isRequired
+  onClearCompleted: PropTypes.func.isRequired,
 }

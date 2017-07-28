@@ -27,7 +27,32 @@ class Root extends React.Component {
       toggleCompleted
     } = this.props;
 
-    // TODO filter = console.log(this.props.match.url)
+    let filter = {
+      active: false,
+      all: false,
+      completed: false,
+    };
+
+    const url = this.props.match.url
+
+    switch(url) {
+      case '/':
+      case '/all':
+        filter.all = true;
+        break;
+
+      case '/active':
+        filter.active = true;
+        break;
+
+      case '/completed':
+        filter.completed = true;
+        break;
+
+      default:
+        console.error(`Unhandled path ${url}`);
+        filter.all = true;
+    }
 
     return (
       <section className='todoapp'>
@@ -78,9 +103,6 @@ class Root extends React.Component {
             <Footer
               activeTodoCount={activeTodoCount}
               completedTodoCount={completedTodoCount}
-              toggleActive={toggleActive}
-              toggleAll={toggleAll}
-              toggleCompleted={toggleCompleted}
               filter={filter}
               onClearCompleted={onClearCompleted(completedTodos)}
             />
