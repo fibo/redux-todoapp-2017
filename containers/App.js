@@ -5,7 +5,6 @@ import {
   deleteTodo,
   editTodo,
   fetchTodosIfNeeded,
-  toggleFilter,
   toggleTodo,
 } from '../actions'
 
@@ -34,7 +33,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchTodosIfNeeded());
     },
     onClearCompleted(todos) {
-      console.log(todos)
       return function () {
         todos.forEach(todo => dispatch(deleteTodo(todo)));
       }
@@ -53,15 +51,6 @@ const mapDispatchToProps = dispatch => {
       return function () {
         dispatch(toggleTodo(todo))
       }
-    },
-    toggleActive() {
-      dispatch(toggleFilter('active'));
-    },
-    toggleAll() {
-      dispatch(toggleFilter('all'));
-    },
-    toggleCompleted() {
-      dispatch(toggleFilter('completed'));
     }
   }
 }

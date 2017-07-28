@@ -27,7 +27,6 @@ export default class TodoItem extends React.Component {
   }
 
   handleSubmit () {
-    console.log(this.state.editText)
     this.setState({ editing: false });
     this.props.onEdit(this.state.editText);
   }

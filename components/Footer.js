@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 export default class Footer extends React.Component {
   render () {
@@ -25,30 +26,28 @@ export default class Footer extends React.Component {
         <span className='todo-count'>{itemMessage}</span>
         <ul className='filters'>
           <li>
-            <a
+            <Link to='/all'
               className={classNames({selected: filter.all})}
               onClick={toggleAll}
             >
               All
-            </a>
+            </Link>
           </li>
-          {' '}
           <li>
-            <a
+            <Link to='/active'
               className={classNames({selected: filter.active})}
               onClick={toggleActive}
             >
               Active
-            </a>
+            </Link>
           </li>
-          {' '}
           <li>
-            <a
+            <Link to='/completed'
               className={classNames({selected: filter.completed})}
               onClick={toggleCompleted}
             >
               Completed
-            </a>
+            </Link>
           </li>
         </ul>
         {(completedTodoCount > 0) ? (

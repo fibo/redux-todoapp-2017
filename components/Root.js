@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import Footer from './Footer';
 import TodoItem from './TodoItem';
@@ -15,7 +16,6 @@ class Root extends React.Component {
       addTodo,
       completedTodoCount,
       completedTodos,
-      filter,
       onClearCompleted,
       onDestroy,
       onEdit,
@@ -26,6 +26,8 @@ class Root extends React.Component {
       toggleAll,
       toggleCompleted
     } = this.props;
+
+    // TODO filter = console.log(this.props.match.url)
 
     return (
       <section className='todoapp'>
@@ -117,4 +119,4 @@ Root.defaultProps = {
   todos: { list: [] }
 };
 
-export default Root;
+export default withRouter(Root);
