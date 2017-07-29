@@ -8,7 +8,7 @@
     "api": "json-server --watch --delay 400 db.json",
     "build": "BABEL_ENV=production webpack -p --progress",
     "lint": "eslint .",
-    "start": "BABEL_ENV=development node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -37,7 +37,7 @@
     "babel-loader": "^7.1.1",
     "babel-preset-react-app": "^3.0.1",
     "classnames": "^2.2.5",
-    "css-loader": "^0.28.4",
+    "dot-editorconfig": "^1.0.1",
     "eslint": "^3.19.0",
     "eslint-config-react-app": "^1.0.5",
     "eslint-plugin-flowtype": "^2.35.0",
@@ -54,7 +54,6 @@
     "react-router-dom": "^4.1.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "style-loader": "^0.18.2",
     "webpack": "^3.3.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.5.1",
