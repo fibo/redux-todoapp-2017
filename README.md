@@ -22,11 +22,11 @@ You can also launch:
 
 I started from React [TodoMVC] example and added:
 
-* [webpack], [ESlint]: to enhance development environment.
-* [Redux]: for a predictable global state container.
-* [redux-thunk]: for async actions.
-* [json-server]: for an easy way to simulate APIs.
-* [React-Router]: to benefit from HTML5 history.
+* [webpack], [ESlint] to enhance development environment.
+* [Redux] for a predictable global state container.
+* [redux-thunk] for async actions.
+* [json-server] for an easy way to simulate APIs.
+* [React-Router] to benefit from HTML5 history.
 
 ## Lesson learned
 
